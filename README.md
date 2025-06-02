@@ -1,98 +1,69 @@
 # Day-17
 
-👨‍💻 Process Management in C — Examples using fork(), wait(), and Shared Memory
-This repository contains simple C programs that demonstrate process creation, inter-process communication, and process synchronization using fork(), wait(), and sleep() system calls in Linux.
+# 👨‍💻 Process Management in C — Examples using `fork()`, `wait()`, and Shared Memory
 
-📁 Program Summaries
-✅ 1. Process Creation and Computation (multi_compute.c)
-Description:
-Prompts the user for an integer and creates three child processes to perform:
+This repository contains simple C programs that demonstrate **process creation**, **inter-process communication**, and **process synchronization** using `fork()`, `wait()`, and `sleep()` system calls in Linux.
 
-Child 1: Computes the factorial of the number.
+---
 
-Child 2: Calculates 2 raised to the power of the number.
+## 📁 Program Summaries
 
-Child 3: Computes the square of the number.
+### ✅ 1. `multi_compute.c`
+**Description:**
+Prompts the user to enter an integer and creates **three child processes**:
+- **Child 1**: Computes the factorial.
+- **Child 2**: Computes 2 raised to the power of the number.
+- **Child 3**: Computes the square of the number.
 
-Each child prints its PID and parent PID. The parent waits for all children to complete.
+Each child prints its parent PID. The parent waits for all children to finish.
 
-Key Concepts:
-fork(), getpid(), getppid(), wait(), arithmetic operations.
+**Concepts Used:** `fork()`, `getpid()`, `getppid()`, `wait()`
 
-✅ 2. Simple Delay (sleep_exit.c)
-Description:
+---
 
-Prints a start message.
+### ✅ 2. `sleep_exit.c`
+**Description:**
+- Prints "Program Started"
+- Sleeps for 3 seconds
+- Prints "Exiting the program" and exits cleanly
 
-Sleeps for 3 seconds.
+**Concepts Used:** `sleep()`, `exit()`
 
-Prints an exit message and exits cleanly using exit(0).
+---
 
-Key Concepts:
-sleep(), exit().
+### ✅ 3. `fork_wait.c`
+**Description:**
+- Parent creates a child process.
+- Child prints its PID, sleeps for 2 seconds, and exits with status `0`.
+- Parent waits, checks if child exited normally, and prints the exit status.
 
-✅ 3. Parent Waits for Child (fork_wait.c)
-Description:
+**Concepts Used:** `fork()`, `sleep()`, `wait()`, `WIFEXITED()`, `WEXITSTATUS()`
 
-Parent process creates a child with fork().
+---
 
-Child sleeps for 2 seconds and exits.
+### ✅ 4. `multi_sleep.c`
+**Description:**
+- First child sleeps for 1 second.
+- Second child sleeps for 3 seconds.
+- Parent waits for both and prints a message after they finish.
 
-Parent waits using wait() and checks child’s exit status.
+**Concepts Used:** Multiple `fork()`, `sleep()`, `wait()`
 
-Key Concepts:
-fork(), sleep(), wait(), WIFEXITED(), WEXITSTATUS().
+---
 
-✅ 4. Multiple Children with Sleep (multi_sleep.c)
-Description:
+### ✅ 5. `shm_writer.c`
+**Description:**
+Creates a System V shared memory segment and writes user input into it.
 
-First child sleeps for 1 second and exits.
+**Concepts Used:** `ftok()`, `shmget()`, `shmat()`, `shmdt()`, `IPC_CREAT`
 
-Second child sleeps for 3 seconds and exits.
+> ⚠️ Note: You will need a matching **reader** program to read from this shared memory segment.
 
-Parent waits for both children and confirms completion.
+---
 
-Key Concepts:
-Multiple fork(), sleep(), wait() for multiple children.
+## 🧪 Compile & Run
 
-✅ 5. Shared Memory Writer (shm_writer.c)
-Description:
-Creates a shared memory segment using System V shared memory, writes a user-input string to it.
-
-Key Concepts:
-ftok(), shmget(), shmat(), shmdt(), IPC_CREAT.
-
-⚠️ Note: A corresponding reader process would be required to read from the shared memory.
-
-🔧 Compilation and Execution
-Use gcc to compile:
-
-bash
-Copy
-Edit
+```bash
 gcc filename.c -o outputname
 ./outputname
-For example:
-
-bash
-Copy
-Edit
-gcc multi_compute.c -o compute
-./compute
-📎 Requirements
-Linux-based OS
-
-GCC compiler
-
-Basic knowledge of Unix system calls
-
-📚 References
-
-man fork
-
-man wait
-
-man sleep
-
-man shmget
 
